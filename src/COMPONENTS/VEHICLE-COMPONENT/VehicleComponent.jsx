@@ -477,6 +477,7 @@ const App = () => {
                                     <option value="">Select</option>
                                     <option value="MT">Manual Transmission</option>
                                     <option value="AT">Automatic Transmission</option>
+                                    <option value="IMT">Intelligent Manual Transmission</option>
                                 </select>
                             </div>
 
@@ -879,7 +880,7 @@ const App = () => {
                     {/* <h2 className="text-center">Vehicle Inspection Summary</h2> */}
 
                     <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                        <img src="/logoCompany.png" alt="Car Truth" height={40} />
+                        <img src="/logoCompany.png" alt="Car Invest" height={40} />
                         <span className="text-muted small">Smart report 2.0 📄</span>
                     </header>
 
@@ -1286,7 +1287,7 @@ const App = () => {
                         <div className="container">
                             {/* Header */}
                             <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                                <img src="/logoCompany.png" alt="Car Truth" height={40} />
+                                <img src="/logoCompany.png" alt="Car Invest" height={40} />
                                 <span className="text-muted small">Smart report 2.0 📄</span>
                             </header>
 
@@ -1307,7 +1308,7 @@ const App = () => {
 
                             {/* Other Services */}
                             <section className="mb-5">
-                                <h2 className="h5 mb-3">Other services by <strong>CAR TRUTH</strong></h2>
+                                <h2 className="h5 mb-3">Other services by <strong>CAR INVEST</strong></h2>
                                 <ul className="list-unstyled">
                                     <li><a href="#" className="text-primary text-decoration-none">CHALLAN →</a></li>
                                     <li><a href="#" className="text-primary text-decoration-none">SERVICE HISTORY →</a></li>
@@ -1324,7 +1325,7 @@ const App = () => {
                                     </h3>
                                     <div className="d-flex gap-4 fw-semibold">
                                         <div>4.5 ★ (58,000+ Google)</div>
-                                        <div>4.5 ★ (25K+ CARS24 app)</div>
+                                        <div>4.5 ★ (25K+ ONEBIDCAR app)</div>
                                         <div>4.5 ★ (16.5K+ Trustpilot)</div>
                                     </div>
                                 </div>
@@ -1343,7 +1344,7 @@ const App = () => {
                                     <a href="#"><FaInstagram /></a>
                                     <a href="#"><FaLinkedin /></a>
                                 </div>
-                                <p>care@cars24.com</p>
+                                <p>care@onebidcar.com</p>
                                 <p className="mt-4 text-muted small mx-auto" style={{ maxWidth: "600px" }}>
                                     Disclaimer: Service provided by CarTruth is conducted to the best of our ability and knowledge at the time of inspection...
                                     (Include your full disclaimer here as in the original image)
