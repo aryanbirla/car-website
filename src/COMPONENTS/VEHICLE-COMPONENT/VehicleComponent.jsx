@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Collapse, Form, Card, Row, Col } from "react-bootstrap";
 import { FaApple, FaGooglePlay, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCogs, faCarSide, faChair, faCarCrash, faBolt, faFan, faFileAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 
 import * as html2pdf from "html2pdf.js";
 import "./VehicleComponent.css";
+import { statesAndUTs, sectionIcons } from "../CONSTANTS/Constants"
+// import { faCogs } from "@fortawesome/free-solid-svg-icons";
 
 const sections = {
     "Exterior & Tyres": [
@@ -86,7 +90,7 @@ const App = () => {
             },
         }));
     };
-    
+
 
 
     const [collapsedSections, setCollapsedSections] = useState(() =>
@@ -179,6 +183,8 @@ const App = () => {
 
 
 
+
+
     const generatePDF = async () => {
         console.log("I am in the generatePDF");
 
@@ -222,27 +228,6 @@ const App = () => {
         // html2pdf().set(opt).from(element).save();
         html2pdf.default().set(opt).from(element).save();
     };
-
-    const sectionIcons = {
-        "Engine & Transmission": "fas fa-cogs",
-        "Exterior & Tyres": "fas fa-car-side",
-        "Interior & Features": "fas fa-chair",
-        "Brakes & Suspension": "fas fa-car-crash",
-        "Electricals & Lights": "fas fa-bolt",
-        "Air Conditioning": "fas fa-fan",
-        "Documents & Accessories": "fas fa-file-alt",
-        // Add more sections as needed
-    };
-
-    const statesAndUTs = [
-        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa",
-        "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala",
-        "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-        "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-        "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands",
-        "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Lakshadweep", "Delhi",
-        "Puducherry", "Ladakh", "Lakshadweep", " Jammu & Kashmir"
-    ];
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -710,131 +695,131 @@ const App = () => {
 
             {/* Form Sections */}
             {!previewPDF &&
-    Object.entries(sections).map(([sectionName, fields]) => (
-        <div key={sectionName} className="mb-4">
-            <div
-                className="d-flex justify-content-between align-items-center bg-primary text-white px-3 py-2 rounded"
-                onClick={() => toggleSection(sectionName)}
-                style={{ cursor: "pointer" }}
-            >
-                <h5 className="m-0">{sectionName}</h5>
-                <span>{collapsedSections[sectionName] ? "+" : "−"}</span>
-            </div>
+                Object.entries(sections).map(([sectionName, fields]) => (
+                    <div key={sectionName} className="mb-4">
+                        <div
+                            className="d-flex justify-content-between align-items-center bg-primary text-white px-3 py-2 rounded"
+                            onClick={() => toggleSection(sectionName)}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <h5 className="m-0">{sectionName}</h5>
+                            <span>{collapsedSections[sectionName] ? "+" : "−"}</span>
+                        </div>
 
-            {!collapsedSections[sectionName] && (
-                <div className="row mt-2">
-                    {fields.map((field) => (
-                        <div className="col-md-6" key={field}>
-                            <div className="card mb-3 shadow-sm">
-                                <div className="card-body">
-                                    <div className="d-flex justify-content-start">
-                                        <label className="form-label fw-bold">{field}</label>
-                                    </div>
-
-                                    {/* Is there any defect? radio button */}
-                                    <div className="d-flex justify-content-start mb-2">
-                                        <label className="form-label">Is there any defect?</label>
-                                        <div className="form-check ms-3">
-                                            <input
-                                                type="radio"
-                                                name={`defect-${field}`}
-                                                value="yes"
-                                                className="form-check-input"
-                                                checked={fieldData[field].defect === "yes"}
-                                                onChange={() => handleDefectChange(field, "yes")}
-                                            />
-                                            <label className="form-check-label">Yes</label>
-                                        </div>
-                                        <div className="form-check ms-3">
-                                            <input
-                                                type="radio"
-                                                name={`defect-${field}`}
-                                                value="no"
-                                                className="form-check-input"
-                                                checked={fieldData[field].defect === "no"}
-                                                onChange={() => handleDefectChange(field, "no")}
-                                            />
-                                            <label className="form-check-label">No</label>
-                                        </div>
-                                    </div>
-
-                                    {/* Image upload button appears only if 'Yes' is selected */}
-                                    {fieldData[field].defect === "yes" && (
-                                        <>
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                multiple
-                                                className="form-control mb-2"
-                                                onChange={(e) =>
-                                                    handleImageChange(field, e.target.files)
-                                                }
-                                            />
-                                        </>
-                                    )}
-
-                                    <textarea
-                                        className="form-control mb-2"
-                                        placeholder="Enter field description"
-                                        value={fieldData[field].description}
-                                        onChange={(e) =>
-                                            handleDescriptionChange(field, e.target.value)
-                                        }
-                                    />
-
-                                    {fieldData[field].images.map((img, idx) => (
-                                        <div key={idx} className="mb-2">
-                                            <div className="d-flex align-items-center gap-2">
-                                                <div
-                                                    className="position-relative"
-                                                    style={{ width: "80px", height: "80px" }}
-                                                >
-                                                    <img
-                                                        src={URL.createObjectURL(img.file)}
-                                                        alt="preview"
-                                                        style={{
-                                                            width: "100%",
-                                                            height: "100%",
-                                                            objectFit: "cover",
-                                                            borderRadius: "5px",
-                                                            border: "1px solid #ccc",
-                                                        }}
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        className="btn-close btn-sm position-absolute top-0 end-0"
-                                                        aria-label="Close"
-                                                        onClick={() => handleDeleteImage(field, idx)}
-                                                        style={{
-                                                            transform: "scale(0.7)",
-                                                            filter: "invert(25%) sepia(94%) saturate(6942%) hue-rotate(357deg) brightness(95%) contrast(100%)",
-                                                        }}
-                                                    />
+                        {!collapsedSections[sectionName] && (
+                            <div className="row mt-2">
+                                {fields.map((field) => (
+                                    <div className="col-md-6" key={field}>
+                                        <div className="card mb-3 shadow-sm">
+                                            <div className="card-body">
+                                                <div className="d-flex justify-content-start">
+                                                    <label className="form-label fw-bold">{field}</label>
                                                 </div>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Image description"
-                                                    className="form-control"
-                                                    value={img.desc}
+
+                                                {/* Is there any defect? radio button */}
+                                                <div className="d-flex justify-content-start mb-2">
+                                                    <label className="form-label">Is there any defect?</label>
+                                                    <div className="form-check ms-3">
+                                                        <input
+                                                            type="radio"
+                                                            name={`defect-${field}`}
+                                                            value="yes"
+                                                            className="form-check-input"
+                                                            checked={fieldData[field].defect === "yes"}
+                                                            onChange={() => handleDefectChange(field, "yes")}
+                                                        />
+                                                        <label className="form-check-label">Yes</label>
+                                                    </div>
+                                                    <div className="form-check ms-3">
+                                                        <input
+                                                            type="radio"
+                                                            name={`defect-${field}`}
+                                                            value="no"
+                                                            className="form-check-input"
+                                                            checked={fieldData[field].defect === "no"}
+                                                            onChange={() => handleDefectChange(field, "no")}
+                                                        />
+                                                        <label className="form-check-label">No</label>
+                                                    </div>
+                                                </div>
+
+                                                {/* Image upload button appears only if 'Yes' is selected */}
+                                                {fieldData[field].defect === "yes" && (
+                                                    <>
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            multiple
+                                                            className="form-control mb-2"
+                                                            onChange={(e) =>
+                                                                handleImageChange(field, e.target.files)
+                                                            }
+                                                        />
+                                                    </>
+                                                )}
+
+                                                <textarea
+                                                    className="form-control mb-2"
+                                                    placeholder="Enter field description"
+                                                    value={fieldData[field].description}
                                                     onChange={(e) =>
-                                                        handleImageDescriptionChange(
-                                                            field,
-                                                            idx,
-                                                            e.target.value
-                                                        )
+                                                        handleDescriptionChange(field, e.target.value)
                                                     }
                                                 />
+
+                                                {fieldData[field].images.map((img, idx) => (
+                                                    <div key={idx} className="mb-2">
+                                                        <div className="d-flex align-items-center gap-2">
+                                                            <div
+                                                                className="position-relative"
+                                                                style={{ width: "80px", height: "80px" }}
+                                                            >
+                                                                <img
+                                                                    src={URL.createObjectURL(img.file)}
+                                                                    alt="preview"
+                                                                    style={{
+                                                                        width: "100%",
+                                                                        height: "100%",
+                                                                        objectFit: "cover",
+                                                                        borderRadius: "5px",
+                                                                        border: "1px solid #ccc",
+                                                                    }}
+                                                                />
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn-close btn-sm position-absolute top-0 end-0"
+                                                                    aria-label="Close"
+                                                                    onClick={() => handleDeleteImage(field, idx)}
+                                                                    style={{
+                                                                        transform: "scale(0.7)",
+                                                                        filter: "invert(25%) sepia(94%) saturate(6942%) hue-rotate(357deg) brightness(95%) contrast(100%)",
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                            <input
+                                                                type="text"
+                                                                placeholder="Image description"
+                                                                className="form-control"
+                                                                value={img.desc}
+                                                                onChange={(e) =>
+                                                                    handleImageDescriptionChange(
+                                                                        field,
+                                                                        idx,
+                                                                        e.target.value
+                                                                    )
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
                             </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    ))}
+                        )}
+                    </div>
+                ))}
 
 
             {/* Action Buttons */}
@@ -880,7 +865,7 @@ const App = () => {
                     {/* <h2 className="text-center">Vehicle Inspection Summary</h2> */}
 
                     <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                        <img src="/logoCompany.png" alt="Car Invest" height={40} />
+                        <img src="/logoCompany.png" alt="Car Invest" height={60} />
                         <span className="text-muted small">Smart report 2.0 📄</span>
                     </header>
 
@@ -1146,10 +1131,14 @@ const App = () => {
 
                                 return (
                                     <div key={sectionTitle} className={`row py-4 border-top ${index === 0 ? 'border-0' : ''}`}>
-                                        <div className="col-md-4 fw-semibold text-dark mb-2 mb-md-0">
-                                            <i className={`${sectionIcons[sectionTitle] || 'fas fa-star'} text-primary me-2`}></i>
+                                        <div className="col-md-4 fw-semibold text-dark mb-2 mb-md-0 d-flex align-items-center">
+                                            <FontAwesomeIcon
+                                                icon={sectionIcons[sectionTitle] || faStar}
+                                                className="text-primary me-2"
+                                            />
                                             {sectionTitle}
                                         </div>
+
                                         <div className="col-md-4 text-muted small">
                                             {description}
                                         </div>
@@ -1174,17 +1163,22 @@ const App = () => {
                                     <img
                                         src={img.preview}
                                         alt={`Image ${index + 1}`}
-                                        className="card-img-top"
-                                        style={{ height: "180px", objectFit: "cover" }}
+                                        className="card-img-top img-fluid"
+                                        style={{ objectFit: "contain" }}
                                     />
 
                                     <div className="card-body text-center">
-                                        <p className="card-text text-truncate">{img.file?.name || `Image ${index + 1}`}</p>
+                                        <p className="card-text text-truncate">
+                                            {img.file?.name || `Image ${index + 1}`}
+                                        </p>
                                         <button
                                             className="btn btn-sm btn-outline-danger"
                                             onClick={() => {
                                                 const updatedImages = ownershipDetails.additionalCarImages.filter((_, i) => i !== index);
-                                                setOwnershipDetails({ ...ownershipDetails, additionalCarImages: updatedImages });
+                                                setOwnershipDetails({
+                                                    ...ownershipDetails,
+                                                    additionalCarImages: updatedImages,
+                                                });
                                             }}
                                         >
                                             Remove
@@ -1194,6 +1188,8 @@ const App = () => {
                             </div>
                         ))}
                     </div>
+
+
 
 
 
@@ -1208,11 +1204,18 @@ const App = () => {
                                 {/* Section Header */}
                                 <div className="d-flex justify-content-between align-items-center p-3 bg-primary text-white rounded-top">
                                     <div>
-                                        <h5 className="mb-1">🔹 {sectionName}</h5>
+                                        <h5 className="mb-1 d-flex align-items-center">
+                                            <FontAwesomeIcon
+                                                icon={sectionIcons[sectionName] || faStar}
+                                                className="me-2"
+                                            />
+                                            {sectionName}
+                                        </h5>
                                         <small>
                                             Perfect parts: {perfectCount} | Imperfect parts: {imperfectCount}
                                         </small>
                                     </div>
+
                                     <div className="fs-4">
                                         <i className="bi bi-tools"></i>
                                     </div>
@@ -1283,11 +1286,11 @@ const App = () => {
                     })}
 
                     {/* THANK YOU PAGE */}
-                    <div className="min-vh-100 bg-white page-breaktext-dark py-5 px-3 font-sans">
+                    <div className="min-vh-100 bg-white page-break text-dark py-5 px-3 font-sans page-break">
                         <div className="container">
                             {/* Header */}
                             <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                                <img src="/logoCompany.png" alt="Car Invest" height={40} />
+                                <img src="/logoCompany.png" alt="Car Invest" height={60} />
                                 <span className="text-muted small">Smart report 2.0 📄</span>
                             </header>
 
