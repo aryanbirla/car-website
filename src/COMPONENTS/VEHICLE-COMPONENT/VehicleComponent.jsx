@@ -1051,7 +1051,7 @@ const App = () => {
                                 <Card className="p-3 border border-primary rounded-4 shadow-sm h-100 bg-light">
                                     <div className="text-muted small">Fuel Type</div>
                                     <div className="fs-5 fw-semibold text-primary">
-                                        {ownershipDetails.fitnessValidity || "—"}
+                                        {ownershipDetails.fuelConsumption || "—"}
                                     </div>
                                 </Card>
                             </Col>
