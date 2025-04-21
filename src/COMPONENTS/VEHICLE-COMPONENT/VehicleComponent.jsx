@@ -1322,10 +1322,10 @@ const App = () => {
                             <section className="mb-5">
                                 <h2 className="h5 mb-3">Other services by <strong>CAR INVEST</strong></h2>
                                 <ul className="list-unstyled">
-                                    <li><a href="#" className="text-primary text-decoration-none">CHALLAN →</a></li>
-                                    <li><a href="#" className="text-primary text-decoration-none">SERVICE HISTORY →</a></li>
-                                    <li><a href="#" className="text-primary text-decoration-none">PRE-DELIVERY INSPECTION →</a></li>
-                                    <li><a href="#" className="text-primary text-decoration-none">PERSONAL LOAN →</a></li>
+                                    <li className="text-primary text-decoration-none">CHALLAN →</li>
+                                    <li className="text-primary text-decoration-none">SERVICE HISTORY →</li>
+                                    <li className="text-primary text-decoration-none">PRE-DELIVERY INSPECTION →</li>
+                                    <li className="text-primary text-decoration-none">PERSONAL LOAN →</li>
                                 </ul>
                             </section>
 
