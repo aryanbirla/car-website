@@ -826,24 +826,33 @@ const App = () => {
             <div className="text-center mb-4">
                 {!previewPDF ? (
                     <>
-                        <button
-                            className="btn btn-outline-primary px-4 me-3"
-                            onClick={() => {
-                                console.log("Form Data:", ownershipDetails);
-                                setPreviewPDF(true)
-                            }}
-                        >
-                            Preview PDF
-                        </button>
-                        <button
-                            className="btn btn-success px-4"
-                            onClick={() => {
-                                setPreviewPDF(true);
-                                setShouldGeneratePDF(true);
-                            }}
-                        >
-                            Download PDF
-                        </button>
+                        <div className="container my-4">
+                            <div className="row justify-content-center gy-2">
+                                <div className="col-12 col-sm-6 col-md-auto d-grid">
+                                    <button
+                                        className="btn btn-outline-primary px-4"
+                                        onClick={() => {
+                                            console.log("Form Data:", ownershipDetails);
+                                            setPreviewPDF(true);
+                                        }}
+                                    >
+                                        Preview PDF
+                                    </button>
+                                </div>
+                                <div className="col-12 col-sm-6 col-md-auto d-grid">
+                                    <button
+                                        className="btn btn-success px-4"
+                                        onClick={() => {
+                                            setPreviewPDF(true);
+                                            setShouldGeneratePDF(true);
+                                        }}
+                                    >
+                                        Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </>
                 ) : (
