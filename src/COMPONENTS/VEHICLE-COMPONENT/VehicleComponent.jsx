@@ -8,6 +8,8 @@ import * as html2pdf from "html2pdf.js";
 import "./VehicleComponent.css";
 import { statesAndUTs, sectionIcons } from "../CONSTANTS/Constants"
 // import { faCogs } from "@fortawesome/free-solid-svg-icons";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const sections = {
     "Exterior & Tyres": [
@@ -185,10 +187,60 @@ const App = () => {
 
 
 
+    // const generatePDF = async () => {
+    //     console.log("I am in the generatePDF");
+
+    //     const element = document.getElementById("pdf-content");// Force visibility
+
+    //     if (!element) {
+    //         console.error("Element with id 'pdf-content' not found.");
+    //         return;
+    //     }
+
+    //     console.log("Element found, generating PDF...");
+
+    //     // Wait for any pending DOM updates
+    //     await new Promise((resolve) => setTimeout(resolve, 500));
+
+    //     const opt = {
+    //         margin: 0.2,
+    //         filename: `Vehicle-Inspection-Submission.pdf`, // Removed index
+    //         image: { type: "jpeg", quality: 0.98 },
+    //         html2canvas: {
+    //             scale: 2,
+    //             useCORS: true,
+    //             allowTaint: true,
+    //         },
+    //         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    //         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    //     };
+
+    //     // Ensure all images are fully loaded before PDF generation
+    //     const images = element.querySelectorAll("img");
+    //     await Promise.all(
+    //         Array.from(images).map((img) =>
+    //             img.complete
+    //                 ? Promise.resolve()
+    //                 : new Promise((resolve) => {
+    //                     img.onload = img.onerror = resolve;
+    //                 })
+    //         )
+    //     );
+
+    //     // Generate PDF using html2pdf
+    //     // html2pdf().set(opt).from(element).save();
+    //     setTimeout(() => {
+    //         html2pdf.default().set(opt).from(element).save();
+    //     },1000);
+
+    // };
+
     const generatePDF = async () => {
         console.log("I am in the generatePDF");
 
         const element = document.getElementById("pdf-content");
+        element?.scrollIntoView();
+
         if (!element) {
             console.error("Element with id 'pdf-content' not found.");
             return;
@@ -196,12 +248,11 @@ const App = () => {
 
         console.log("Element found, generating PDF...");
 
-        // Wait for any pending DOM updates
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         const opt = {
             margin: 0.2,
-            filename: `Vehicle-Inspection-Submission.pdf`, // Removed index
+            filename: `Vehicle-Inspection-Submission.pdf`,
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: {
                 scale: 2,
@@ -212,7 +263,6 @@ const App = () => {
             pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         };
 
-        // Ensure all images are fully loaded before PDF generation
         const images = element.querySelectorAll("img");
         await Promise.all(
             Array.from(images).map((img) =>
@@ -224,10 +274,12 @@ const App = () => {
             )
         );
 
-        // Generate PDF using html2pdf
-        // html2pdf().set(opt).from(element).save();
-        html2pdf.default().set(opt).from(element).save();
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        setTimeout(() => {
+            html2pdf.default().set(opt).from(element).save();
+        }, isIOS ? 1500 : 1000);
     };
+
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -785,6 +837,7 @@ const App = () => {
                                                                         borderRadius: "5px",
                                                                         border: "1px solid #ccc",
                                                                     }}
+                                                                    crossOrigin="anonymous"
                                                                 />
                                                                 <button
                                                                     type="button"
@@ -875,7 +928,7 @@ const App = () => {
                     {/* <h2 className="text-center">Vehicle Inspection Summary</h2> */}
 
                     <header className="d-flex flex-column flex-sm-row justify-content-between align-items-center text-center text-sm-start border-bottom pb-3 mb-4">
-                        <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-2 mb-sm-0" />
+                        <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-2 mb-sm-0" crossOrigin="anonymous" />
                         <span className="text-muted small">Smart report 2.0 📄</span>
                     </header>
 
@@ -910,6 +963,7 @@ const App = () => {
                                         alt="Inspection Banner"
                                         className="img-fluid rounded-3"
                                         style={{ maxHeight: "300px", maxWidth: "100%", objectFit: "contain" }}
+                                        crossOrigin="anonymous"
                                     />
                                 </div>
 
@@ -985,6 +1039,7 @@ const App = () => {
                                             alt="Car Front"
                                             className="img-fluid w-100"
                                             style={{ objectFit: "cover", height: "100%" }}
+                                            crossOrigin="anonymous"
                                         />
                                     ) : (
                                         <div className="text-center py-5">No Image Available</div>
@@ -1171,6 +1226,7 @@ const App = () => {
                                             alt={`Image ${index + 1}`}
                                             className="card-img-top img-fluid"
                                             style={{ objectFit: "cover" }}
+                                            crossOrigin="anonymous"
                                         />
                                     </div>
 
@@ -1278,6 +1334,7 @@ const App = () => {
                                                                 objectFit: "cover",
                                                                 borderRadius: "4px",
                                                             }}
+                                                            crossOrigin="anonymous"
                                                         />
 
                                                         <p className="mb-1 fw-bold">{field}</p>
@@ -1298,7 +1355,7 @@ const App = () => {
                         <div className="container">
                             {/* Header */}
                             <header className="d-flex flex-column flex-md-row justify-content-between align-items-center border-bottom pb-3 mb-4 text-center text-md-start">
-                                <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-3 mb-md-0" />
+                                <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-3 mb-md-0" crossOrigin="anonymous" />
                                 <span className="text-muted small">Smart report 2.0 📄</span>
                             </header>
 
