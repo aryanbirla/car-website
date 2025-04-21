@@ -6,7 +6,9 @@
 body {
   /* background-image: url("./background.png"); */
   /* or .png, depending on your image format */
+  
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
+

@@ -272,7 +272,8 @@ const App = () => {
 
 
     return (
-        <div className="container my-4">
+        <div className="container-fluid px-3 px-md-5 py-4 bg-white min-vh-100">
+
             <h1 className="mb-4 text-center fw-bold">Vehicle Inspection Form</h1>
 
             {/* Ownership Details */}
@@ -873,20 +874,20 @@ const App = () => {
                 <div id="pdf-content">
                     {/* <h2 className="text-center">Vehicle Inspection Summary</h2> */}
 
-                    <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                        <img src="/logoCompany.png" alt="Car Invest" height={60} />
+                    <header className="d-flex flex-column flex-sm-row justify-content-between align-items-center text-center text-sm-start border-bottom pb-3 mb-4">
+                        <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-2 mb-sm-0" />
                         <span className="text-muted small">Smart report 2.0 📄</span>
                     </header>
 
-                    {/* Banner-page */}
-                    <div className="page-break mb-5 p-4 border rounded shadow-sm" style={{ backgroundColor: "#f8f9fa" }}>
-                        {/* Inspection Banner */}
-                        <div className="p-4 bg-white rounded-4 border border-primary shadow-sm">
-                            <div className="row align-items-center">
 
+                    {/* Banner-page */}
+                    <div className="page-break mb-5 p-3 p-md-4 border rounded shadow-sm" style={{ backgroundColor: "#f8f9fa" }}>
+                        {/* Inspection Banner */}
+                        <div className="p-3 p-md-4 bg-white rounded-4 border border-primary shadow-sm">
+                            <div className="row align-items-center">
                                 {/* Left Column: Text Info */}
-                                <div className="col-md-6">
-                                    <div className="d-flex flex-column justify-content-center h-100">
+                                <div className="col-12 col-md-6 mb-4 mb-md-0">
+                                    <div className="d-flex flex-column justify-content-center h-100 text-center text-md-start">
                                         <h3 className="text-uppercase fw-bold text-primary mb-3">
                                             Comprehensive Car Inspection Report
                                         </h3>
@@ -903,25 +904,24 @@ const App = () => {
                                 </div>
 
                                 {/* Right Column: Image */}
-                                <div className="col-md-6 text-center">
+                                <div className="col-12 col-md-6 text-center">
                                     <img
                                         src="/BANNER_POSTER.png"
                                         alt="Inspection Banner"
                                         className="img-fluid rounded-3"
-                                        style={{ minHeight: "55vh", objectFit: "contain" }}
+                                        style={{ maxHeight: "300px", objectFit: "contain", width: "100%" }}
                                     />
                                 </div>
                             </div>
                         </div>
 
-
-                        <Card className="p-4 border border-primary rounded-4 shadow-sm my-4">
+                        <Card className="p-3 p-md-4 border border-primary rounded-4 shadow-sm my-4">
                             <Row className="align-items-center">
                                 {/* Column 1: Plate + Car Info */}
-                                <Col md={6}>
+                                <Col xs={12} md={6} className="mb-4 mb-md-0">
                                     <div className="text-uppercase text-muted small">IND</div>
                                     <div
-                                        className="border border-primary rounded-3 px-4 py-2 d-inline-block mb-3 shadow-sm"
+                                        className="border border-primary rounded-3 px-3 px-md-4 py-2 d-inline-block mb-3 shadow-sm"
                                         style={{
                                             background: "linear-gradient(135deg, #e8f0ff 0%, #ffffff 100%)",
                                             fontFamily: "monospace",
@@ -944,7 +944,7 @@ const App = () => {
                                 </Col>
 
                                 {/* Column 2: Meta Info + Stats */}
-                                <Col md={6}>
+                                <Col xs={12} md={6}>
                                     <div className="text-muted mb-3">
                                         <div><strong>Location:</strong> {ownershipDetails.stateOfRegistration || "New Delhi"}</div>
                                         <div><strong>Report Date:</strong> {new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</div>
@@ -967,18 +967,16 @@ const App = () => {
                                 </Col>
                             </Row>
                         </Card>
-
-
-
                     </div>
+
 
 
                     {/* Ownership PDF Content - Hidden from UI but shown in PDF */}
                     <div className="p-4">
-                        {/* Top 2 Cards Row: Car Image + Car Info */}
-                        <Row className="mb-4 align-items-center">
+                        {/* Car Image + Car Info */}
+                        <Row className="mb-4 g-3">
                             {/* Car Image */}
-                            <Col md={6}>
+                            <Col xs={12} md={6}>
                                 <Card className="border rounded-4 shadow-sm h-100 overflow-hidden">
                                     {ownershipDetails.carFrontPhoto ? (
                                         <img
@@ -994,26 +992,25 @@ const App = () => {
                             </Col>
 
                             {/* Car Details */}
-                            <Col md={6}>
-                                <Card className="border rounded-4 shadow-sm h-100 p-4" style={{ backgroundColor: "#fff" }}>
+                            <Col xs={12} md={6}>
+                                <Card className="border rounded-4 shadow-sm h-100 p-4 bg-white">
                                     <h5 className="fw-bold">{ownershipDetails.carName || "—"}</h5>
 
-                                    <div className="mb-3 text-muted small">
-                                        <span className="me-3">{ownershipDetails.variantName || "_"}</span>
-                                        <span className="me-3">{ownershipDetails.purchaseDate ? new Date(ownershipDetails.purchaseDate).getFullYear() : "—"}</span>
-                                        <span className="me-3">{ownershipDetails.carTransmission || "_"}</span>
+                                    <div className="mb-3 text-muted small d-flex flex-wrap gap-2">
+                                        <span>{ownershipDetails.variantName || "_"}</span>
+                                        <span>{ownershipDetails.purchaseDate ? new Date(ownershipDetails.purchaseDate).getFullYear() : "—"}</span>
+                                        <span>{ownershipDetails.carTransmission || "_"}</span>
                                         <span>{ownershipDetails.fuelConsumption || "_"}</span>
                                     </div>
 
                                     {/* Rating & Status */}
-                                    <div className="d-flex align-items-center mb-3">
+                                    <div className="d-flex align-items-center flex-wrap mb-3">
                                         <div className={`px-2 py-1 rounded me-2 fw-semibold small ${ratingBadge}`}>
                                             Overall Rating
                                         </div>
                                         <div className="fw-bold fs-5 me-2">{overallRating}/5</div>
                                         <span className="text-muted">{ratingLabel}</span>
                                     </div>
-
 
                                     {/* Odometer */}
                                     <div className="mb-3 d-flex align-items-center">
@@ -1031,27 +1028,26 @@ const App = () => {
                             </Col>
                         </Row>
 
-                        <Row className="mb-4">
-                            <Col md={4}>
-                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100" style={{ background: "linear-gradient(135deg, #e8f0ff 0%, #ffffff 100%)" }}>
+                        {/* 3 Mini Info Cards */}
+                        <Row className="mb-4 g-3">
+                            <Col xs={12} md={4}>
+                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100 bg-light">
                                     <div className="text-muted small">Insurance Validity</div>
                                     <div className="fs-5 fw-semibold text-primary">
                                         {ownershipDetails.ownershipType || "—"}
                                     </div>
                                 </Card>
                             </Col>
-
-                            <Col md={4}>
-                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100" style={{ background: "linear-gradient(135deg, #e8f0ff 0%, #ffffff 100%)" }}>
+                            <Col xs={12} md={4}>
+                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100 bg-light">
                                     <div className="text-muted small">Odometer Reading</div>
                                     <div className="fs-5 fw-semibold text-primary">
                                         {ownershipDetails.odometerReading || "—"}
                                     </div>
                                 </Card>
                             </Col>
-
-                            <Col md={4}>
-                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100" style={{ background: "linear-gradient(135deg, #e8f0ff 0%, #ffffff 100%)" }}>
+                            <Col xs={12} md={4}>
+                                <Card className="p-3 border border-primary rounded-4 shadow-sm h-100 bg-light">
                                     <div className="text-muted small">Fuel Type</div>
                                     <div className="fs-5 fw-semibold text-primary">
                                         {ownershipDetails.fitnessValidity || "—"}
@@ -1060,59 +1056,50 @@ const App = () => {
                             </Col>
                         </Row>
 
-
+                        {/* Health Summary */}
                         <h5>Health Report Summary</h5>
                         <p>{ownershipDetails.healthReportSummary || "—"}</p>
 
+                        {/* Ownership & Documentation */}
                         <h5 className="fw-bold mb-3">Ownership & Documentation</h5>
                         <Card className="p-4 border-0 shadow-sm rounded-4">
                             <Row className="mb-3">
-                                <Col md={6}><span className="fw-semibold">Owner:</span> {ownershipDetails.ownerName || "—"}</Col>
-                                <Col md={6}><span className="fw-semibold">Insurance validity & Type:</span> {ownershipDetails.insuranceValidity || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Owner:</span> {ownershipDetails.ownerName || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Insurance validity & Type:</span> {ownershipDetails.insuranceValidity || "—"}</Col>
                             </Row>
                             <Row className="mb-3">
-                                <Col md={6}><span className="fw-semibold">Reg. State/RTD:</span> {ownershipDetails.stateOfRegistration || "—"}</Col>
-                                <Col md={6}><span className="fw-semibold">Estimated kms driven / yr:</span> {ownershipDetails.estimatedKmsPerYear || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Reg. State/RTD:</span> {ownershipDetails.stateOfRegistration || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Estimated kms driven / yr:</span> {ownershipDetails.estimatedKmsPerYear || "—"}</Col>
                             </Row>
                             <Row className="mb-3">
-                                <Col md={6}>
+                                <Col xs={12} md={6}>
                                     <span className="fw-semibold">Year purchased (1st owner):</span>{" "}
                                     {ownershipDetails.purchaseDate
                                         ? new Date(ownershipDetails.purchaseDate).getFullYear()
                                         : "—"}
                                 </Col>
-                                <Col md={6}><span className="fw-semibold">PUC validity:</span> {ownershipDetails.pucValidity || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">PUC validity:</span> {ownershipDetails.pucValidity || "—"}</Col>
                             </Row>
                             <Row className="mb-3">
-                                <Col md={6}><span className="fw-semibold">Type of owner:</span> {ownershipDetails.ownershipType || "—"}</Col>
-                                <Col md={6}><span className="fw-semibold">Hypothecation:</span> {ownershipDetails.hypothecation || "No"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Type of owner:</span> {ownershipDetails.ownershipType || "—"}</Col>
+                                <Col xs={12} md={6}><span className="fw-semibold">Hypothecation:</span> {ownershipDetails.hypothecation || "No"}</Col>
                             </Row>
-
-                            {/* {ownershipDetails.carFrontPhoto && (
-                                <div className="mt-4">
-                                    <h6 className="fw-semibold mb-2">Car Front Photograph:</h6>
-                                    <img
-                                        src={URL.createObjectURL(ownershipDetails.carFrontPhoto)}
-                                        alt="Car Front"
-                                        className="img-fluid rounded-3 border"
-                                        style={{ maxHeight: "240px", objectFit: "cover" }}
-                                    />
-                                </div>
-                            )} */}
                         </Card>
                     </div>
 
+
                     {/* Summary Page */}
                     <div className="container my-5 page-break p-4 bg-white border rounded shadow-sm">
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <h2 className="text-start text-primary fw-bold fs-2 mb-0"><i className="fas fa-thumbtack text-primary me-2"></i>
-                                Overall Summary</h2>
-                            <i className="fa-solid fa-car fa-2x text-primary"></i>  {/* <-- replace with any Font Awesome icon */}
+                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+                            <h2 className="text-primary fw-bold fs-3 mb-3 mb-md-0">
+                                <i className="fas fa-thumbtack text-primary me-2"></i> Overall Summary
+                            </h2>
+                            <i className="fa-solid fa-car fa-2x text-primary"></i>
                         </div>
-                        <p className="text-start text-muted mb-5 fs-6">
+
+                        <p className="text-muted mb-4 fs-6">
                             This page summarizes the condition of each major section of the vehicle based on uploaded images and notes.
                         </p>
-
 
                         <div className="border-top">
                             {Object.entries(sections).map(([sectionTitle, fields], index) => {
@@ -1140,7 +1127,7 @@ const App = () => {
 
                                 return (
                                     <div key={sectionTitle} className={`row py-4 border-top ${index === 0 ? 'border-0' : ''}`}>
-                                        <div className="col-md-4 fw-semibold text-dark mb-2 mb-md-0 d-flex align-items-center">
+                                        <div className="col-12 col-md-4 fw-semibold text-dark mb-2 mb-md-0 d-flex align-items-center">
                                             <FontAwesomeIcon
                                                 icon={sectionIcons[sectionTitle] || faStar}
                                                 className="text-primary me-2"
@@ -1148,36 +1135,46 @@ const App = () => {
                                             {sectionTitle}
                                         </div>
 
-                                        <div className="col-md-4 text-muted small">
+                                        <div className="col-12 col-md-4 text-muted small mb-2 mb-md-0">
                                             {description}
                                         </div>
-                                        <div className="col-md-4 text-end">
-                                            <span className="fw-bold me-2">{rating}/5</span>
-                                            <span className={`badge rounded-pill px-3 py-2 ${statusBadge}`}>
-                                                {status}
-                                            </span>
+
+                                        <div className="col-12 col-md-4 text-md-end">
+                                            <div className="d-flex justify-content-start justify-content-md-end align-items-center flex-wrap gap-2">
+                                                <span className="fw-bold">{rating}/5</span>
+                                                <span className="text-warning">
+                                                    {Array.from({ length: 5 }, (_, i) => (
+                                                        <i key={i} className={`fas fa-star${i < Math.round(numericRating) ? '' : '-o'}`}></i>
+                                                    ))}
+                                                </span>
+                                                <span className={`badge rounded-pill px-3 py-2 ${statusBadge}`}>
+                                                    {status}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-
                                 );
                             })}
                         </div>
                     </div>
+
 
                     {/* All Images of the car */}
                     <div className="row g-4">
                         {ownershipDetails.additionalCarImages.map((img, index) => (
                             <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index}>
                                 <div className="card h-100 shadow-sm">
-                                    <img
-                                        src={img.preview}
-                                        alt={`Image ${index + 1}`}
-                                        className="card-img-top img-fluid"
-                                        style={{ objectFit: "contain" }}
-                                    />
+                                    <div className="ratio ratio-4x3">
+                                        <img
+                                            src={img.preview}
+                                            alt={`Image ${index + 1}`}
+                                            className="card-img-top img-fluid"
+                                            style={{ objectFit: "cover" }}
+                                        />
+                                    </div>
 
                                     <div className="card-body text-center">
-                                        <p className="card-text text-truncate">
+                                        <p className="card-text text-truncate mb-2">
                                             {img.file?.name || `Image ${index + 1}`}
                                         </p>
                                         <button
@@ -1203,6 +1200,7 @@ const App = () => {
 
 
 
+
                     {/* Information Page */}
                     {Object.entries(sections).map(([sectionName, fields]) => {
                         const perfectCount = fields.filter(field => fieldData[field].images.length === 0).length;
@@ -1211,8 +1209,8 @@ const App = () => {
                         return (
                             <div key={sectionName} className="mb-4 border rounded">
                                 {/* Section Header */}
-                                <div className="d-flex justify-content-between align-items-center p-3 bg-primary text-white rounded-top">
-                                    <div>
+                                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center p-3 bg-primary text-white rounded-top">
+                                    <div className="mb-2 mb-md-0">
                                         <h5 className="mb-1 d-flex align-items-center">
                                             <FontAwesomeIcon
                                                 icon={sectionIcons[sectionName] || faStar}
@@ -1224,62 +1222,63 @@ const App = () => {
                                             Perfect parts: {perfectCount} | Imperfect parts: {imperfectCount}
                                         </small>
                                     </div>
-
                                     <div className="fs-4">
                                         <i className="bi bi-tools"></i>
                                     </div>
                                 </div>
 
-                                {/* Table */}
-                                <table className="table table-bordered m-0">
-                                    <thead className="table-light">
-                                        <tr>
-                                            <th>Parameters</th>
-                                            <th className="text-center">Perfect</th>
-                                            <th className="text-center">Imperfect</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {fields.map((field) => {
-                                            const isImperfect = fieldData[field].images.length > 0;
-                                            return (
-                                                <tr key={field}>
-                                                    <td>{field}</td>
-                                                    <td className="text-center text-success">
-                                                        {!isImperfect && <span className="fs-5">✓</span>}
-                                                    </td>
-                                                    <td className="text-center text-danger">
-                                                        {isImperfect && <span className="fs-5">✗</span>}
-                                                    </td>
-                                                    <td>{fieldData[field].description}</td>
-                                                </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
+                                {/* Responsive Table */}
+                                <div className="table-responsive">
+                                    <table className="table table-bordered m-0">
+                                        <thead className="table-light">
+                                            <tr>
+                                                <th>Parameters</th>
+                                                <th className="text-center">Perfect</th>
+                                                <th className="text-center">Imperfect</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {fields.map((field) => {
+                                                const isImperfect = fieldData[field].images.length > 0;
+                                                return (
+                                                    <tr key={field}>
+                                                        <td>{field}</td>
+                                                        <td className="text-center text-success">
+                                                            {!isImperfect && <span className="fs-5">✓</span>}
+                                                        </td>
+                                                        <td className="text-center text-danger">
+                                                            {isImperfect && <span className="fs-5">✗</span>}
+                                                        </td>
+                                                        <td>{fieldData[field].description}</td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                {/* Images */}
-                                {/* Images */}
-                                <div className="p-3">
+                                {/* Image Section */}
+                                <div className="p-3" style={{ overflowX: "hidden" }}>
+
                                     <h6 className="fw-bold mb-3">{sectionName} defected parts:</h6>
 
                                     <div className="row">
                                         {fields.map((field) =>
                                             fieldData[field].images.map((img, idx) => (
-                                                <div key={`${field}-${idx}`} className="col-md-3 col-sm-4 col-6 mb-4">
-                                                    <div className="border p-2 rounded">
+                                                <div key={`${field}-${idx}`} className="col-6 col-sm-4 col-md-3 mb-4">
+                                                    <div className="border p-2 rounded h-100">
                                                         <img
                                                             src={URL.createObjectURL(img.file)}
                                                             alt="img"
-                                                            className="img-fluid mb-2"
+                                                            className="img-fluid w-100 mb-2"
                                                             style={{
                                                                 height: "120px",
-                                                                width: "100%",
                                                                 objectFit: "cover",
                                                                 borderRadius: "4px",
                                                             }}
                                                         />
+
                                                         <p className="mb-1 fw-bold">{field}</p>
                                                         <p style={{ whiteSpace: "pre-wrap", fontSize: "0.9rem" }}>{img.desc}</p>
                                                     </div>
@@ -1288,24 +1287,23 @@ const App = () => {
                                         )}
                                     </div>
                                 </div>
-
-
                             </div>
                         );
                     })}
 
+
                     {/* THANK YOU PAGE */}
-                    <div className="min-vh-100 bg-white page-break text-dark py-5 px-3 font-sans page-break">
+                    <div className="min-vh-100 bg-white text-dark py-5 px-2 px-md-4 font-sans page-break">
                         <div className="container">
                             {/* Header */}
-                            <header className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                                <img src="/logoCompany.png" alt="Car Invest" height={60} />
+                            <header className="d-flex flex-column flex-md-row justify-content-between align-items-center border-bottom pb-3 mb-4 text-center text-md-start">
+                                <img src="/logoCompany.png" alt="Car Invest" height={60} className="mb-3 mb-md-0" />
                                 <span className="text-muted small">Smart report 2.0 📄</span>
                             </header>
 
                             {/* Thank You Section */}
-                            <section className="mb-5">
-                                <h1 className="display-5 text-orange mb-3 text-primary fw-bold">Thank you for choosing us!</h1>
+                            <section className="mb-5 text-center text-md-start">
+                                <h1 className="display-6 text-primary fw-bold mb-3">Thank you for choosing us!</h1>
                                 <p className="lead">
                                     We truly appreciate your decision to prioritize the safety and maintenance of your vehicle.
                                     By opting for a thorough inspection, you're ensuring not only the longevity of your car
@@ -1319,29 +1317,29 @@ const App = () => {
                             </section>
 
                             {/* Other Services */}
-                            <section className="mb-5">
+                            <section className="mb-5 text-center text-md-start">
                                 <h2 className="h5 mb-3">Other services by <strong>CAR INVEST</strong></h2>
                                 <ul className="list-unstyled">
-                                    <li className="text-primary text-decoration-none">CHALLAN →</li>
-                                    <li className="text-primary text-decoration-none">SERVICE HISTORY →</li>
-                                    <li className="text-primary text-decoration-none">PRE-DELIVERY INSPECTION →</li>
-                                    <li className="text-primary text-decoration-none">PERSONAL LOAN →</li>
+                                    <li className="text-primary">CHALLAN →</li>
+                                    <li className="text-primary">SERVICE HISTORY →</li>
+                                    <li className="text-primary">PRE-DELIVERY INSPECTION →</li>
+                                    <li className="text-primary">PERSONAL LOAN →</li>
                                 </ul>
                             </section>
 
                             {/* Review & Ratings */}
-                            <section className="bg-light rounded p-4 d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
-                                <div className="mb-4 mb-md-0">
-                                    <h3 className="h5 mb-3">
+                            <section className="bg-light rounded p-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-5 text-center text-md-start">
+                                <div>
+                                    <h3 className="h6 fw-semibold mb-3">
                                         Buying, selling, and financing pre-owned cars is now easier than ever!
                                     </h3>
-                                    <div className="d-flex gap-4 fw-semibold">
+                                    <div className="d-flex flex-column flex-sm-row gap-2 gap-sm-4 fw-semibold justify-content-center justify-content-md-start">
                                         <div>4.5 ★ (58,000+ Google)</div>
                                         <div>4.5 ★ (25K+ ONEBIDCAR app)</div>
                                         <div>4.5 ★ (16.5K+ Trustpilot)</div>
                                     </div>
                                 </div>
-                                <div className="d-flex gap-3">
+                                <div className="d-flex gap-3 justify-content-center justify-content-md-end">
                                     <a href="#"><FaGooglePlay size={30} className="text-dark" /></a>
                                     <a href="#"><FaApple size={30} className="text-dark" /></a>
                                 </div>
@@ -1349,7 +1347,7 @@ const App = () => {
 
                             {/* Footer */}
                             <footer className="border-top pt-4 text-center text-muted small">
-                                <h4 className="text-orange h6 fw-semibold mb-3">Keep in touch</h4>
+                                <h4 className="h6 fw-semibold mb-3 text-primary">Keep in touch</h4>
                                 <div className="d-flex justify-content-center gap-3 mb-3 fs-5 text-dark">
                                     <a href="#"><FaFacebook /></a>
                                     <a href="#"><FaTwitter /></a>
@@ -1357,13 +1355,14 @@ const App = () => {
                                     <a href="#"><FaLinkedin /></a>
                                 </div>
                                 <p>care@onebidcar.com</p>
-                                <p className="mt-4 text-muted small mx-auto" style={{ maxWidth: "600px" }}>
+                                <p className="mt-4 mx-auto text-muted small" style={{ maxWidth: "600px" }}>
                                     Disclaimer: Service provided by CarTruth is conducted to the best of our ability and knowledge at the time of inspection...
                                     (Include your full disclaimer here as in the original image)
                                 </p>
                             </footer>
                         </div>
                     </div>
+
 
 
                 </div>
