@@ -909,9 +909,10 @@ const App = () => {
                                         src="/BANNER_POSTER.png"
                                         alt="Inspection Banner"
                                         className="img-fluid rounded-3"
-                                        style={{ maxHeight: "300px", objectFit: "contain", width: "100%" }}
+                                        style={{ maxHeight: "300px", maxWidth: "100%", objectFit: "contain" }}
                                     />
                                 </div>
+
                             </div>
                         </div>
 
@@ -1207,7 +1208,7 @@ const App = () => {
                         const imperfectCount = fields.filter(field => fieldData[field].images.length > 0).length;
 
                         return (
-                            <div key={sectionName} className="mb-4 border rounded">
+                            <div key={sectionName} className="mb-4 border rounded page-break">
                                 {/* Section Header */}
                                 <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center p-3 bg-primary text-white rounded-top">
                                     <div className="mb-2 mb-md-0">
