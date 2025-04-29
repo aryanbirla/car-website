@@ -187,59 +187,10 @@ const App = () => {
 
 
 
-    // const generatePDF = async () => {
-    //     console.log("I am in the generatePDF");
-
-    //     const element = document.getElementById("pdf-content");// Force visibility
-
-    //     if (!element) {
-    //         console.error("Element with id 'pdf-content' not found.");
-    //         return;
-    //     }
-
-    //     console.log("Element found, generating PDF...");
-
-    //     // Wait for any pending DOM updates
-    //     await new Promise((resolve) => setTimeout(resolve, 500));
-
-    //     const opt = {
-    //         margin: 0.2,
-    //         filename: `Vehicle-Inspection-Submission.pdf`, // Removed index
-    //         image: { type: "jpeg", quality: 0.98 },
-    //         html2canvas: {
-    //             scale: 2,
-    //             useCORS: true,
-    //             allowTaint: true,
-    //         },
-    //         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-    //         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    //     };
-
-    //     // Ensure all images are fully loaded before PDF generation
-    //     const images = element.querySelectorAll("img");
-    //     await Promise.all(
-    //         Array.from(images).map((img) =>
-    //             img.complete
-    //                 ? Promise.resolve()
-    //                 : new Promise((resolve) => {
-    //                     img.onload = img.onerror = resolve;
-    //                 })
-    //         )
-    //     );
-
-    //     // Generate PDF using html2pdf
-    //     // html2pdf().set(opt).from(element).save();
-    //     setTimeout(() => {
-    //         html2pdf.default().set(opt).from(element).save();
-    //     },1000);
-
-    // };
-
     const generatePDF = async () => {
         console.log("I am in the generatePDF");
 
-        const element = document.getElementById("pdf-content");
-        element?.scrollIntoView();
+        const element = document.getElementById("pdf-content");// Force visibility
 
         if (!element) {
             console.error("Element with id 'pdf-content' not found.");
@@ -248,11 +199,12 @@ const App = () => {
 
         console.log("Element found, generating PDF...");
 
+        // Wait for any pending DOM updates
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         const opt = {
             margin: 0.2,
-            filename: `Vehicle-Inspection-Submission.pdf`,
+            filename: `Vehicle-Inspection-Submission.pdf`, // Removed index
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: {
                 scale: 2,
@@ -263,6 +215,7 @@ const App = () => {
             pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
         };
 
+        // Ensure all images are fully loaded before PDF generation
         const images = element.querySelectorAll("img");
         await Promise.all(
             Array.from(images).map((img) =>
@@ -274,11 +227,58 @@ const App = () => {
             )
         );
 
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        // Generate PDF using html2pdf
+        // html2pdf().set(opt).from(element).save();
         setTimeout(() => {
             html2pdf.default().set(opt).from(element).save();
-        }, isIOS ? 1500 : 1000);
+        }, 1000);
+
     };
+
+    // const generatePDF = async () => {
+    //     console.log("I am in the generatePDF");
+
+    //     const element = document.getElementById("pdf-content");
+    //     element?.scrollIntoView();
+
+    //     if (!element) {
+    //         console.error("Element with id 'pdf-content' not found.");
+    //         return;
+    //     }
+
+    //     console.log("Element found, generating PDF...");
+
+    //     await new Promise((resolve) => setTimeout(resolve, 500));
+
+    //     const opt = {
+    //         margin: 0.2,
+    //         filename: `Vehicle-Inspection-Submission.pdf`,
+    //         image: { type: "jpeg", quality: 0.98 },
+    //         html2canvas: {
+    //             scale: 2,
+    //             useCORS: true,
+    //             allowTaint: true,
+    //         },
+    //         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    //         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    //     };
+
+    //     const images = element.querySelectorAll("img");
+    //     await Promise.all(
+    //         Array.from(images).map((img) =>
+    //             img.complete
+    //                 ? Promise.resolve()
+    //                 : new Promise((resolve) => {
+    //                     img.onload = img.onerror = resolve;
+    //                 })
+    //         )
+    //     );
+
+    //     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    //     setTimeout(() => {
+    //         html2pdf.default().set(opt).from(element).save();
+    //     }, isIOS ? 1500 : 1000);
+    // };
 
 
 
@@ -378,14 +378,18 @@ const App = () => {
                                     <label className="form-label fw-bold">Car Model Year</label>
                                 </div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control"
                                     min="1900"
                                     max={new Date().getFullYear()}
                                     value={ownershipDetails.carModel}
                                     onChange={(e) =>
-                                        setOwnershipDetails({ ...ownershipDetails, carModel: e.target.value })
+                                        setOwnershipDetails({
+                                            ...ownershipDetails,
+                                            carModel: e.target.value
+                                        })
                                     }
+
                                     placeholder="e.g., 2020"
                                 />
                             </div>
@@ -992,7 +996,7 @@ const App = () => {
                                     </h2>
                                     <div className="text-muted small mb-2">
                                         {ownershipDetails.variantName || "LDI"} &nbsp;|&nbsp;
-                                        {ownershipDetails.purchaseDate ? new Date(ownershipDetails.purchaseDate).getFullYear() : "2018"} &nbsp;|&nbsp;
+                                        {ownershipDetails.carModel} &nbsp;|&nbsp;
                                         {ownershipDetails.carTransmission === "AT" ? "Automatic" : "Manual"} &nbsp;|&nbsp;
                                         {ownershipDetails.fuelConsumption || "Diesel"}
                                     </div>
