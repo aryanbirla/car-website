@@ -430,7 +430,7 @@ const App = () => {
                                     <label className="form-label fw-bold">Odometer Reading</label>
                                 </div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control"
                                     value={ownershipDetails.odometerReading}
                                     onChange={(e) =>
@@ -445,7 +445,7 @@ const App = () => {
                                     <label className="form-label fw-bold">Kilometers / Year</label>
                                 </div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control"
                                     value={ownershipDetails.estimatedKmsPerYear}
                                     onChange={(e) =>
@@ -495,7 +495,7 @@ const App = () => {
                                     <label className="form-label fw-bold">No of Challans</label>
                                 </div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="form-control"
                                     value={ownershipDetails.noOfChallans}
                                     onChange={(e) =>
