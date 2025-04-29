@@ -6,46 +6,11 @@ import { faCogs, faCarSide, faChair, faCarCrash, faBolt, faFan, faFileAlt, faSta
 
 import * as html2pdf from "html2pdf.js";
 import "./VehicleComponent.css";
-import { statesAndUTs, sectionIcons } from "../CONSTANTS/Constants"
+import { statesAndUTs, sectionIcons, sections } from "../CONSTANTS/Constants"
 // import { faCogs } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-const sections = {
-    "Exterior & Tyres": [
-        "Pillar LHS B", "Apron LHS", "Apron RHS", "Apron LHS LEG", "Apron RHS LEG",
-        "Firewall", "Cowl Top", "Upper Cross Member (Bonnet Patti)", "Lower Cross Member",
-        "Radiator Support", "Head Light Support", "Windshield Front", "Grill",
-        "Is the Car Waterlogged?", "RHS Front Tyre", "Roof", "Bonnet/Hood",
-        "Dicky Door / Boot Door", "Boot Floor", "Quarter Panel LHS", "Quarter Panel RHS",
-        "Fender LHS", "Fender RHS", "Pillar LHS A", "Pillar LHS C", "Pillar RHS C",
-        "Pillar RHS B", "Pillar RHS A", "Running Border LHS", "Running Border RHS",
-        "Door LHS Front", "Door LHS Rear", "Door RHS Front", "Door RHS Rear",
-        "Windshield Rear", "Light LHS Headlight", "Light RHS Headlight",
-        "Light LHS Taillight", "Light RHS Taillight", "Bumper Rear", "Bumper Front",
-        "ORVM Manual / Electrical LHS", "ORVM Manual / Electrical RHS", "Tyre Spare Tyre",
-        "LHS Front Tyre", "LHS Rear Tyre", "RHS Rear Tyre"
-    ],
-    "Engine & Transmission": [
-        "Engine", "Exhaust Smoke", "Engine Mounting", "Clutch", "Gear Shifting",
-        "Engine Oil Level Dipstik", "Battery", "Coolant", "Sump",
-        "Engine Sound", "Engine Oil"
-    ],
-    "Electricals & Interiors": [
-        "2 Power Windows", "Airbag Feature", "Music System", "ABS", "Electrical",
-        "Interior", "No. Of Airbags", "Fabric Seat",
-        "Parking Sensor", "No. Of Airbags 2", "No. Of Power Windows"
-    ],
-    "Steering, Suspension & Brakes": [
-        "Steering", "Brake", "Suspension"
-    ],
-    "Air Conditioning": [
-        "AC Cooling", "Heater"
-    ],
-    "Other Details": [
-        "Chassis Embossing", "RC Availability", "Insurance Image", "Duplicate Key"
-    ],
-};
 
 const App = () => {
     const [shouldGeneratePDF, setShouldGeneratePDF] = useState(false);
